@@ -3,8 +3,8 @@
 import {k} from "./kaboom.js"
 
 // Load assets
-loadSprite("blurbyWalk", "/sprites/walk+idletransparent.png", {
-	sliceX: 6,
+loadSprite("blurbyWalk", "/codeSucc/src/Sprites/walk+idletransparent.png", {
+    sliceX: 6, 
 	anims: {
 		"run": {
 			from: 1,
@@ -15,23 +15,10 @@ loadSprite("blurbyWalk", "/sprites/walk+idletransparent.png", {
 		"idle": 0
 	},
 })
-
-loadSprite("enemy", "/sprites/enemy.png", {
-	sliceX: 2,
-	anims: {
-		walk: {
-			from: 0, 
-			to: 1, 
-			speed: 10,
-			loop: true,
-		},
-		"idle": 0
-	},
-})
-
-loadSprite("floor", "/sprites/cobbletext.png")
-loadSprite("background", "/sprites/background.png")
-loadSprite("door", "/sprites/door.png")
+loadSprite("car", "/codeSucc/src/Sprites/car.jpg")
+loadSprite("floor", "/codeSucc/src/Sprites/cobbletext.png")
+loadSprite("background", "/codeSucc/src/Sprites/background.png")
+loadSprite("door", "/codeSucc/src/Sprites/door.png")
 
 var SPEED = 320
 const JUMP_FORCE = 600
@@ -45,8 +32,8 @@ const LEVELS = [
         "                                                                               ",
         "                                                                               ",
         "                                                                               ",
-        "                                                                               ",
-        "                                                                               ",
+        " @                                                                              ",
+        "============================================================================== ",
         "                                                                               ",
 	],
 	
@@ -111,7 +98,7 @@ scene("game", ({ levelIdx, score }) => {
 			"player",
 		],
 		"^": () => [
-			sprite("enemy"),
+			sprite("car"),
 			area(),
 			body(),
 			origin("bot"),
@@ -159,7 +146,7 @@ timer.onUpdate(()=>{
     timer.text = timer.time.toFixed(2);
 });
 	
-	onCollide("ghost", "player", (g, p) => {
+	onCollide("car", "player", (g, p) => {
 		gameTime = gameTime + 5
 		go("game", {
 			levelIdx: checkpoint
@@ -254,7 +241,7 @@ player.onAnimEnd("idle", () => {
 	scene("win", () => {
 
 		add([
-			text("Blurby succeeded in his incomprehensible objective!", {
+			text("blurbyWalk succeeded in his incomprehensible objective!", {
 				width: width(),
 			}),
 			pos((width()/2) - 200 , (height()/2) - 50),
